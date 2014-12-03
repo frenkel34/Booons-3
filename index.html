@@ -1,9 +1,6 @@
 
 <html>
     <head>
-        <title>Booons app version 2</title>
-    </head>
-    <body>
     	<!-- all layout and looks -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +27,9 @@
 		<!-- fontawesome link -->
 		<link rel="stylesheet" href="ext/fontawesome/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+        <title>Booons app version 2</title>
+    </head>
+    <body>
 
 <!-- HOME -->
 		 <div data-role="page" id="login"> 
@@ -47,10 +47,6 @@
 				<br/ >
 				<br/ >				
 				<div id="fb-root">root...</div>
-				
-				
-				
-
 			</div>
 			<div data-role="footer" data-position="fixed">
 				<h4>copyright seons</h4>
@@ -87,6 +83,7 @@
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
 	  function checkLoginState() {
+	    console.log('starting first contact with fb');
 		FB.getLoginStatus(function(response) {
 		  statusChangeCallback(response);
 		});
