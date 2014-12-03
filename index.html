@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Booons app version 2</title>
+    </head>
+    <body>
+    	<!-- all layout and looks -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
+		<link rel="stylesheet" href="themes/booons.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />		
+		<!-- temp css for development -->
+		<link rel="stylesheet" href="css/basic2.css" />
+
+    	<!-- technical stuff -->
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/jquery.mobile-1.4.2.min.js"></script>
+
+		<!-- added from r2 -->
+        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+        <script type="text/javascript" charset="utf-8" src="jquery_1.5.2.min.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="js/booons.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/interaction.js"></script>
+        <script type="text/javascript" src="js/PushNotification.js"></script>
+		<script type="text/javascript" src="js/sha1.js"></script>
+		
+		<!-- fontawesome link -->
+		<link rel="stylesheet" href="ext/fontawesome/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+
+		<!-- Start of first index page-->
+		 <div data-role="page" id="login"> 
+			<div data-role="header" data-position="fixed">
+				<h1 class="hdrGroupName">booons</h1>
+				<a id="close" class="ui-btn-left" data-icon="alert">sluit</a>
+			</div>
+			<div data-role="content">
+				<div class="formItem">
+					<label for="text-basic"></label>
+					<input type="text" placeholder="@Naam" id="txtUsername" value="" />
+				</div> 
+				<div class="formItem formItemGroup">
+					<label for="text-basic"></label>
+					<input type="text" placeholder="#Groep" id="txtGroup" value=""/> 
+				</div> 
+				<div class="formItemSubmit">
+					<button class="ui-btn ui-icon-check ui-btn-icon-left"  id="btnSubmitLogin">Speel</button>
+				</div> 
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>copyright seons</h4>
+			</div>
+		</div>
+<!-- /page -->
+
+<!-- Start of user list for group page-->
+		 <div data-role="page" id="group_userlist"> 
+			<div data-role="header">
+				<h1 class="hdrGroupName" data-position="fixed">#groupname</h1>
+				<a href="#debug" class="ui-btn-left" data-transition="slide" data-direction="reverse" data-icon="alert">debug</a>
+				<a href="#group_eventlist" class="ui-btn-right" data-transition="slide" data-direction="reverse" data-icon="eye">watsgeburt</a>
+			</div>
+			<div data-role="content">
+				<div class="divRoundRunner">
+					Er wordt nu koffie gehaald door <span class="lblRunnerName">iemand</span>.
+					<div class="divCloseRound"><input type="button" value="Klaar!" class="btnCloseRound" /></div>				
+				</div>
+				<div class="divRoundCounter">
+					ronde sluit over<br />
+					<span class="countDown"></span>
+					<input type="button" value="Bestel" class="btnSelectProduct">
+				</div>
+				<div class="divRoundButton">
+					<input type="button" value="Start ronde" class="btnStartRound" />				
+				</div>				
+				<div class="divRefreshButton">
+					<input type="button" value="Refresh" class="btnRefresh" />				
+				</div>				
+				<ul id="lstUserlist" data-role="listview" data-inset="true">
+					<li class="ui-icon-user ui-btn-icon-left" style="padding-left:35px;">User!</li>
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>copyright seons</h4>
+			</div>
+		</div>
+<!-- /page -->
+
+<!-- Start of event list for group page-->
+		 <div data-role="page" id="group_eventlist"> 
+			<div data-role="header" data-position="fixed">
+				<h1 class="hdrGroupName">#groupname</h1>
+				<a href="#debug" class="ui-btn-left" data-transition="slide" data-direction="reverse" data-icon="alert">debug</a>
+				<a href="#group_userlist" class="ui-btn-right" data-transition="slide" data-direction="reverse" data-icon="user">gebruikers</a>
+			</div>
+			<div data-role="content">
+				<div class="divRoundRunner">
+					Er wordt nu koffie gehaald door <span class="lblRunnerName">iemand</span>.
+					<div class="divCloseRound"><input type="button" value="Klaar!" class="btnCloseRound" /></div>				
+				</div>
+				<div class="divRoundCounter">
+					ronde sluit over<br />
+					<span class="countDown"></span>
+					<input type="button" value="Bestel" class="btnSelectProduct">
+				</div>
+				<div class="divRoundButton">
+					<input type="button" value="Start ronde" class="btnStartRound" />				
+				</div>				
+				<div class="divRefreshButton">
+					<input type="button" value="Refresh" class="btnRefresh" />				
+				</div>				
+				<ul id="lstEventlist" data-role="listview" data-inset="true">
+
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>copyright seons</h4>
+			</div>
+		</div>
+<!-- /page -->
+
+<!-- Start of round selection page-->
+		 <div data-role="page" id="round_select"> 
+			<div data-role="header" data-position="fixed">
+				<h1 class="hdrGroupName">#groupname</h1>
+				<a href="#debug" class="ui-btn-left" data-transition="slide" data-direction="reverse" data-icon="alert">debug</a>
+				<a href="#login" class="ui-btn-right" data-transition="slide" data-direction="reverse" data-icon="delete">login</a>
+			</div>
+			<div data-role="content">
+				<div id="lstProductlist" data-role="listview" data-inset="true">
+					<li class="liProduct ui-icon-heart ui-btn-icon-left" style="padding-left:35px;">Koffie</li>
+					<li class="liProduct ui-icon-location ui-btn-icon-left" style="padding-left:35px;">Water</li>
+					<li class="liProduct ui-icon-cloud ui-btn-icon-left" style="padding-left:35px;">Thee</li>
+					<li class="liProduct ui-icon-carat-u ui-btn-icon-left" style="padding-left:35px;">Water</li>
+				</div>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>copyright seons</h4>
+			</div>
+		</div>
+<!-- /page -->
+
+<!-- Start of shoppinglist page-->
+		 <div data-role="page" id="order"> 
+			<div data-role="header" data-position="fixed">
+				<h1>What to get</h1>
+				<a href="#debug" class="ui-btn-left" data-transition="slide" data-direction="reverse" data-icon="alert">debug</a>
+				<a href="#login" class="ui-btn-right" data-transition="slide" data-direction="reverse" data-icon="delete">login</a>
+			</div>
+			<div data-role="content">
+				<div class="divRoundRunner">
+					Er wordt nu koffie gehaald door <span class="lblRunnerName">iemand</span>.
+					<div class="divCloseRound"><input type="button" value="Klaar!" class="btnCloseRound" /></div>				
+				</div>
+				<ul id="lstRoundlist" data-role="listview" data-inset="true">
+
+				</ul>
+			</div>				
+			<div data-role="footer" data-position="fixed">
+				<h4>copyright seons</h4>
+			</div>
+		</div>
+<!-- /page -->
+
+
+<!-- Start of debug page-->
+		 <div data-role="page" id="debug"> 
+			<div data-role="header" data-position="fixed">
+				<h1>debug info</h1>
+				<a href="#login" class="ui-btn-right" data-transition="slide" data-direction="reverse" data-icon="delete">login</a>
+			</div>			
+			<div data-role="content">
+				<h2>Saved vars</h2>
+				Last server update on group:<br />
+				<input type="text" placeholder="" id="dbgSync" value="" /> 
+				Username:<br />
+				<input type="text" placeholder="" id="dbgUsername" value="" /> 
+				Active round:<br />
+				<input type="text" placeholder="" id="dbgRound" value="" /> 
+				GCM event logging:<br />
+				<ul id="app-status-ul">
+					<li>Process started</li>
+				</ul>
+				Group:<br />
+				<input type="text" placeholder="" id="dbgGroup" value="" /> 
+				Token:<br />
+				<input type="text" placeholder="" id="dbgToken" value="" /> 
+				Roundstatus:<br />
+				This is the hydrated version!
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>copyright seons</h4>
+			</div>
+		</div>
+<!-- /page -->
+    </body>
+    <script>
+
+$(document).on("pagebeforeshow","",function(){ // When entering pagetwo
+	var url = document.URL;
+	var sPageid = window.location.hash.substr('#');
+	updateLists();
+	
+
+	
+	
+	if (sPageid != '') {
+		console.log( '>> page changed to '+ sPageid  );	
+		console.log( 'start integrity check' );	
+		var sCurrentUser 	= $("#dbgUsername").val();
+		var sCurrentGroup 	= $("#dbgGroup").val();
+		if(sCurrentGroup == '' || sCurrentUser == ''){
+			alert('Zelfs Booons heeft wel een een ochtendhumeur, log even opnieuw in!');
+			setTimeout(function() {$.mobile.changePage("#login", {transition : "slide"}); },500);
+		};		
+	} else {
+		console.log( '>> page changed to '+ sPageid  );	
+	}
+});
+
+		$("#close").click(function(){
+			console.log('clicked to close');	
+			alert("Deze app is zo awesome, dat je m niet KAN sluiten :p ");
+		});
+	
+	
+		$("#btnGotoCam").click(function(){
+			console.log('clicked to go to photo page');
+			setTimeout(function() {$.mobile.changePage("#takePhoto", {transition : "slide"}); },500);
+			console.log('just flipped 9');	
+		});
+		$("#btnTakePhoto").click(function(){
+			console.log('clicked to take a selfy');
+			alert('start camara');
+			getPicture();
+			alert('getPicture is voltooid');
+		});
+		$("#btnSelectPhoto").click(function(){
+			console.log('clicked to select a pic');
+			alert('start album');
+		});
+		$("#btnSubmitPhoto").click(function(){
+			console.log('clicked to submit the pic');
+			alert('uploaden die handel');
+		});
+	
+	
+    	$(".btnRefresh").click(function(){
+			console.log('clicked to refresh the events');
+			getGroupDataFromApi();
+    	});
+	
+    	$(".btnCloseRound").click(function(){
+			console.log('clicked to close round');
+			console.log('reset the rounds in the group');
+			resetGroup();
+			console.log('get the event for the group from api');
+			getGroupDataFromApi();
+			setTimeout(function() {$.mobile.changePage("#group_eventlist", {transition : "slide"}); },500);
+			console.log('just flipped 5');				
+    	});
+    	$(".btnSelectProduct").click(function(){
+			console.log('clicked to join running round');
+			setTimeout(function() {$.mobile.changePage("#round_select", {transition : "slide"}); },500);
+			console.log('just flipped 6');
+    	});
+     
+    	$(".liProduct").click(function(){
+    		var sProduct = $(this).text();
+			console.log('clicked a product ('+ sProduct +')');
+	    	setRoundProduct(sProduct);
+			console.log('send the round data to api');	    	
+    	});
+    	
+		$("#btnSubmitLogin").click(function(){
+			console.log('login submit clicked');
+			if ($("#txtUsername").val() != '' && $("#txtGroup").val() != ''){
+				console.log('set dbg objects');
+				$("#dbgUsername").val($("#txtUsername").val());
+				$("#dbgGroup").val($("#txtGroup").val());
+				console.log('register the device');
+				$("#app-status-ul").append('<li>call register function</li>');
+				registerDevice();
+				console.log('login the user bu api');
+	//			alert('token in index: '+ $("#dbgToken").val());
+				setUserInGroup();
+	//			alert('token in index2: '+ $("#dbgToken").val());
+				console.log('get the event for the group from api');
+				getGroupDataFromApi();
+				console.log('set groupnames');
+				$(".hdrGroupName").text('#' + $("#dbgGroup").val());
+				console.log('flip page, after short delay');
+				setTimeout(function() {$.mobile.changePage("#group_userlist", {transition : "slide"}); },200);
+				console.log('just flipped 7');
+			}
+			else {	
+				alert('Booons is anoniem, maar niet zo anoniem he?!');
+			}
+	    });
+	    
+		$(".btnStartRound").click(function(){
+			console.log('round start clicked');
+			$.mobile.changePage("#round_select", {transition : "slide"});
+			console.log('just flipped 8');
+	    });
+	    
+		$( ".goto_group_userlist" ).click(function(){
+			console.log('click to eventlist for group');
+			$.mobile.changePage("#group_eventlist", {transition : "slide"});
+			console.log('just flipped 9');					
+		});	    
+
+		$( ".goto_group_eventlist" ).click(function(){
+			console.log('right swipe to eventlist for group');
+			$.mobile.changePage("#group_userlist", {transition : "slide"});
+			console.log('just flipped 10');
+		});	    
+    </script>
+</html>
