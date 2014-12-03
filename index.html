@@ -13,6 +13,7 @@
 		<!-- temp css for development -->
 		<link rel="stylesheet" href="css/basic2.css" />
 
+		
     	<!-- technical stuff -->
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/jquery.mobile-1.4.2.min.js"></script>
@@ -25,6 +26,7 @@
         <script type="text/javascript" charset="utf-8" src="js/interaction.js"></script>
         <script type="text/javascript" src="js/PushNotification.js"></script>
 		<script type="text/javascript" src="js/sha1.js"></script>
+        <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>		
 		
 		<!-- fontawesome link -->
 		<link rel="stylesheet" href="ext/fontawesome/css/font-awesome.min.css">
@@ -41,17 +43,28 @@
 
 				<br />----------------------<br />
 
-				
-					<div id="fb-root"></div>
-					<script>(function(d, s, id) {
-					  var js, fjs = d.getElementsByTagName(s)[0];
-					  if (d.getElementById(id)) return;
-					  js = d.createElement(s); js.id = id;
-					  js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&appId=881623415189803&version=v2.0";
-					  fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));</script>
 
-					<div class="fb-login-button" data-max-rows="2" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+				
+				
+				
+        <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <div class="event listening button" onclick="login();">Login with Facebook</div>
+            <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
+            <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
+            <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
+            <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
+            <div class="event listening button" onclick="logout();">Logout with Facebook</div>
+        </div>
+        <div id="fb-root"></div>
+				
+				
+				
+				
 				
 				
 
@@ -65,24 +78,47 @@
 		</div>
 <!-- /page -->
     </body>
-    <script>
-if (typeof CDV === 'undefined') {
-    alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
-}
-if (typeof FB === 'undefined') {
-    alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
-}
- 
-document.addEventListener('deviceready', function() {
-    try {
-        FB.init({
-            appId: "881623415189803",
-            nativeInterface: CDV.FB,
-            useCachedDialogs: false
-        });
-    } catch (e) {
-        alert(e);
-    }
-}, false);
-    </script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
+        <script type="text/javascript">
+            var login = function () {
+                if (!window.cordova) {
+                    var appId = prompt("Enter FB Application ID", "");
+                    facebookConnectPlugin.browserInit(appId);
+                }
+                facebookConnectPlugin.login( ["email"], 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var showDialog = function () { 
+                facebookConnectPlugin.showDialog( { method: "feed" }, 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var apiTest = function () { 
+                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) }); 
+            }
+
+            var getAccessToken = function () { 
+                facebookConnectPlugin.getAccessToken( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var getStatus = function () { 
+                facebookConnectPlugin.getLoginStatus( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var logout = function () { 
+                facebookConnectPlugin.logout( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+        </script>
 </html>
