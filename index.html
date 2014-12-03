@@ -1,22 +1,5 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
@@ -28,30 +11,47 @@
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-			<div class="event listening button" onclick="startAppRoutine();">Start Boons routine</div>
+            <h1>Booons FB test</h1>
+			<div class="event listening button" onclick="startApp();">Start Boons routine</div>
             <div class="event listening button" onclick="login();">Login with Facebook</div>
             <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
             <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
             <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
             <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
             <div class="event listening button" onclick="logout();">Logout with Facebook</div>
+			<div class="event listening button" onclick="initfb();">Manually Initialize Facebook</div>
         </div>
         <div id="fb-root"></div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
         <script type="text/javascript">
            
+			function startApp() {
+				console.log('function: startApp');
+				initfb();
+				facebookConnectPlugin.getLoginStatus( 
+                    function (response) { processStatus(response.status) },
+                    function (response) { processStatus(response.status) });
+            }			
+			
+			
 			function onDeviceReady() {
-				
-				console.log('app says that device is ready');
+			   console.log('function: onDeviceReady');
 			};
 			
+			function processStatus(sStatusString) {
+			   console.log('function: processStatus');
+				alert('Status: '+ sStatusString +'!!!!!');
+				if (sStatusString == 'connected') {
+					alert('ready to go !');
+				
+				} else {
+					startLoginRoutine();
+				}			
+			}
+			
 			function processLogin(sStatusString) {
+			   console.log('function: processLogin');
 				alert('Status: '+ sStatusString +'!!!!!');
 				if (sStatusString == 'connected') {
 					alert('ready to go !');
@@ -63,8 +63,8 @@
 			
 			}
 			
-			function startAppRoutine() {
-			   console.log('start login routine');
+			function startLoginRoutine() {
+			   console.log('function: startLoginRoutine');
 			   var connectionStatus = '';
                 if (!window.cordova) {
                     var appId = "881623415189803";
@@ -74,11 +74,15 @@
                     function (response) { processLogin(response.status) },
                     function (response) { processLogin(response.status) }
 				);
-				
-
 			}
 			
 			 document.addEventListener("deviceready", onDeviceReady, false);
+			
+			var initfb = function () {
+					console.log('init manually');
+                    var appId = "881623415189803";
+                    facebookConnectPlugin.browserInit(appId);
+			}
 			
 			var login = function () {
                 if (!window.cordova) {
