@@ -3,13 +3,13 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "seons.booons.nl"
+        id        = "seons3.booons.nl"
         version   = "0.4">
 
     <name>Booons fb test !</name>
 
     <description>
-        Beta version of the Booons app by Seons!
+        Test version of the Booons app by Seons!
     </description>
 
     <author href="http://seons.nl" email="support@seons.nl">
