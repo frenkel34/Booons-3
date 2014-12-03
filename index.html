@@ -56,8 +56,8 @@
                     function (response) { alert('failed: '+ JSON.stringify(response)) });
 				
                 facebookConnectPlugin.getLoginStatus( 
-                    function (response) { alert(response[0].status) },
-                    function (response) { alert(response[0].status) });
+                    function (response) { alert(response.status) },
+                    function (response) { alert(response.status) });
 				}
 
 			var login = function () {
