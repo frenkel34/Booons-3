@@ -33,18 +33,34 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+            <div class="event listening button" onclick="openApp();">Open Booons</div>
             <div class="event listening button" onclick="login();">Login with Facebook</div>
             <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
             <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
             <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
             <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
             <div class="event listening button" onclick="logout();">Logout with Facebook</div>
-        </div>
+			<div id="debuglog" style="margin-top:20px;">
+			test1
+			</div>        
+		</div>
         <div id="fb-root"></div>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
         <script type="text/javascript">
-            var login = function () {
+			var openApp = function () {
+				alert('test 1');
+                facebookConnectPlugin.getLoginStatus( 
+                    function (response) { alert('succesful: '+ JSON.stringify(response)) },
+                    function (response) { alert('failed: '+ JSON.stringify(response)) });
+				
+                facebookConnectPlugin.getLoginStatus( 
+                    function (response) { alert(response[0].status) },
+                    function (response) { alert(response[0].status) });
+				}
+
+			var login = function () {
                 if (!window.cordova) {
                     var appId = "881623415189803";
                     facebookConnectPlugin.browserInit(appId);
