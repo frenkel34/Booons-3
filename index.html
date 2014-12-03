@@ -34,11 +34,18 @@
 			var openApp = function () {
                 facebookConnectPlugin.getLoginStatus( 
 					function (response) { connectionStatus = response.status },
-                    function (response) { connectionStatus = response.status  });
-					
+                    function (response) { connectionStatus = response.status  });	
 				alert('result of login check: '+ connectionStatus);
+				
+				if (connectionStatus == 'connected') {
+					alert('start a login proccess');
+				
+				} else {
+					alert('logged in and ready !');
+				
+				};
 				}
-
+			
 				
 			var login = function () {
                 if (!window.cordova) {
