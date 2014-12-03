@@ -32,11 +32,6 @@
         <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
         <script type="text/javascript">
 			var openApp = function () {
-				alert('test 1');
-                facebookConnectPlugin.getLoginStatus( 
-                    function (response) { alert('succesful: '+ JSON.stringify(response)) },
-                    function (response) { alert('failed: '+ JSON.stringify(response)) });
-				
                 facebookConnectPlugin.getLoginStatus( 
 					function (response) { connectionStatus = response.status },
                     function (response) { connectionStatus = response.status  });
