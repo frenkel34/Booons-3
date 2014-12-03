@@ -32,22 +32,22 @@ if (!window.cordova) {
         showDialog: function (options, s, f) {
 
             if (!options.name) {
-                options.name = "";
+                options.name = "name 1";
             }
             if (!options.message) {
-                options.message = "";
+                options.message = "message 1";
             }
             if (!options.caption) {
-                options.caption = "";
+                options.caption = "caption 1";
             }
             if (!options.description) {
-                options.description = "";
+                options.description = "description 1";
             }
             if (!options.href) {
-                options.href = "";
+                options.href = "href 1";
             }
             if (!options.picture) {
-                options.picture = "";
+                options.picture = "picture 1";
             }
             
             // Try will catch errors when SDK has not been init
