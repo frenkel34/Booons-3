@@ -56,10 +56,14 @@
                     function (response) { alert('failed: '+ JSON.stringify(response)) });
 				
                 facebookConnectPlugin.getLoginStatus( 
-                    function (response) { alert(response.status) },
-                    function (response) { alert(response.status) });
+					var connectionStatus = 'undetected';
+					function (response) { connectionStatus = response.status },
+                    function (response) { connectionStatus = response.status  });
+					
+				alert('result of login check: '+ connectionStatus);
 				}
 
+				
 			var login = function () {
                 if (!window.cordova) {
                     var appId = "881623415189803";
