@@ -33,6 +33,7 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+			<div class="event listening button" onclick="startAppRoutine();">Start Boons routine</div>
             <div class="event listening button" onclick="login();">Login with Facebook</div>
             <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
             <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
@@ -44,7 +45,42 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
         <script type="text/javascript">
-            var login = function () {
+           
+			function onDeviceReady() {
+				
+				console.log('app says that device is ready');
+			};
+			
+			function processLogin(sStatusString) {
+				alert('Status: '+ sStatusString +'!!!!!');
+				if (sStatusString == 'connected') {
+					alert('ready to go !');
+				
+				} else {
+					alert('Throw an error');
+				}			
+			
+			
+			}
+			
+			function startAppRoutine() {
+			   console.log('start login routine');
+			   var connectionStatus = '';
+                if (!window.cordova) {
+                    var appId = "881623415189803";
+                    facebookConnectPlugin.browserInit(appId);
+                }
+                facebookConnectPlugin.login( ["email"], 
+                    function (response) { processLogin(response.status) },
+                    function (response) { processLogin(response.status) }
+				);
+				
+
+			}
+			
+			 document.addEventListener("deviceready", onDeviceReady, false);
+			
+			var login = function () {
                 if (!window.cordova) {
                     var appId = "881623415189803";
                     facebookConnectPlugin.browserInit(appId);
@@ -83,6 +119,7 @@
                     function (response) { alert(JSON.stringify(response)) },
                     function (response) { alert(JSON.stringify(response)) });
             }
+			
         </script>
     </body>
 </html>
